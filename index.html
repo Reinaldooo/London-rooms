@@ -1,14 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>London Rooms</title>
-  <link rel="stylesheet" href="./css/main.css">
-</head>
-<body>
-
-
-  <script src="./js/index.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>London Rooms</title>
+    <link rel="stylesheet" href="./css/normalize.css" />
+    <link rel="stylesheet" href="./css/all.min.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header class="topbar flex-spcbtw">
+        <div class="topbar__logo">
+          <i class="fas fa-suitcase"></i>
+          london rooms
+        </div>
+        <a class="topbar__user" href="#">
+          Reinaldo
+          <img src="./assets/user.jpg" alt="user-avatar" />
+        </a>
+      </header>
+      <div class="main">
+        <div class="options">
+          <input type="date" id="datepicker" class="options__dates" placeholder="Check-in / Check-out">
+        </div>
+      </div>
+    </div>
+    <script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/pt.js"></script>
+    <script src="./js/index.js"></script>
+  </body>
 </html>

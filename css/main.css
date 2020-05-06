@@ -1,5 +1,83 @@
-* {
+@import url("https://fonts.googleapis.com/css2?family=Catamaran:wght@600&display=swap");
+*,
+*::after,
+*::before {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit; }
+
+body {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; }
+
+.container {
+  margin: 0 auto;
+  width: 75%; }
+
+.flex-spcbtw {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center; }
+
+.topbar {
+  padding: 30px 40px; }
+  .topbar__logo {
+    font-family: "Catamaran", sans-serif;
+    color: #ff385c;
+    font-size: 35px; }
+  .topbar__user {
+    border-radius: 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    text-decoration: none;
+    padding: 5px 15px;
+    color: #555;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+    -webkit-transition: -webkit-box-shadow 0.2s ease 0s;
+    transition: -webkit-box-shadow 0.2s ease 0s;
+    transition: box-shadow 0.2s ease 0s;
+    transition: box-shadow 0.2s ease 0s, -webkit-box-shadow 0.2s ease 0s; }
+    .topbar__user:hover {
+      -webkit-box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+              box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); }
+    .topbar__user img {
+      border-radius: 50%;
+      height: 30px;
+      margin-left: 10px; }
+
+.options {
+  margin: 0 auto;
+  width: 310px;
+  height: 60px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+  -webkit-transition: -webkit-box-shadow 0.2s ease 0s;
+  transition: -webkit-box-shadow 0.2s ease 0s;
+  transition: box-shadow 0.2s ease 0s;
+  transition: box-shadow 0.2s ease 0s, -webkit-box-shadow 0.2s ease 0s;
+  overflow: hidden; }
+  .options:hover {
+    -webkit-box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); }
+  .options__dates {
+    padding: 10px 20px;
+    height: 100%;
+    width: 100%;
+    border: none;
+    color: #555; }
+/*# sourceMappingURL=main.css.map */
