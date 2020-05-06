@@ -31,12 +31,20 @@ body {
 .container {
   margin: 0 auto;
   width: 75%;
+  max-width: 1100px;
 }
 
 .flex-spcbtw {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+}
+
+.flex-center {  
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .topbar {
@@ -48,7 +56,7 @@ body {
     font-size: 35px;
   }
   &__user {
-    border-radius: 10px;
+    border-radius: 5px;
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -63,9 +71,9 @@ body {
     }
 
     & img {
-        border-radius: 50%;
-        height: 30px;
-        margin-left: 10px;
+      border-radius: 50%;
+      height: 30px;
+      margin-left: 10px;
     }
   }
 }
@@ -73,9 +81,9 @@ body {
 .options {
   margin: 0 auto;
   width: 310px;
-  height: 60px;
+  height: 50px;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
   transition: box-shadow 0.2s ease 0s;
   overflow: hidden;
@@ -89,6 +97,85 @@ body {
     height: 100%;
     width: 100%;
     border: none;
-    color: #555;
-  }  
+    color: #aaa;
+  }
+}
+
+.featured {
+  margin: 40px 0;
+  width: 100%;
+
+  &__map {
+    height: 400px;
+    width: 47.5%;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  &__rooms {
+    height: 400px;
+    width: 47.5%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__room {
+    height: 47.5%;
+    width: 48.5%;
+    position: relative;    
+    border-radius: 5px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.2s ease 0s;
+    overflow: hidden;
+
+    &:hover {
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      overflow: hidden;
+      transition: transform .5s;
+
+      &:hover {
+          transform: scale(1.05);
+      }
+    }
+
+    &__medal {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        background-color: rgba(255,255,255,.8);
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+
+        & i {
+            color: #ff385c;
+            font-size: 20px;
+        }
+    }
+
+    &__score {
+        position: absolute;
+        right: 5px;
+        bottom: 5px;
+        background-color: rgba(255,255,255,.8);
+        border-radius: 5px;
+        width: 50px;
+        height: 28px;
+        font-size: 14px;
+        line-height: 100%;
+        color: #555;        
+
+        & i {
+            color: #ff385c;
+            margin-right: 5px;
+            margin-bottom: 3px;
+        }
+    }
+  }
 }
