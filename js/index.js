@@ -198,7 +198,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     zoomOffset: -1
 }).addTo(mymap);
 
-let marker = L.marker([51.3, 21.6]).addTo(mymap);
+let marker = L.marker([51.5, -0.09]).addTo(mymap);
 
 const renderNormalCard = (card) => {
   const div = document.createElement("div");
