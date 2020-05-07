@@ -11,6 +11,18 @@ body {
   -webkit-box-sizing: border-box;
           box-sizing: border-box; }
 
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
 .container {
   margin: 0 auto 600px;
   width: 75%;
@@ -121,6 +133,8 @@ body {
         -ms-flex-align: center;
             align-items: center; }
   .featured__room {
+    -webkit-animation: fadeIn .2s;
+            animation: fadeIn .2s;
     cursor: pointer;
     height: 47.5%;
     width: 48.5%;
@@ -202,6 +216,8 @@ body {
   margin-top: 50px; }
 
 .card {
+  -webkit-animation: fadeIn .2s;
+          animation: fadeIn .2s;
   cursor: pointer;
   color: #555;
   width: 23.5%;

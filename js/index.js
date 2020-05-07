@@ -1,5 +1,7 @@
-
+const apiUrl = "https://api.sheety.co/30b6e400-9023-4a15-8e6c-16aa4e3b1e72";
+let data = [];
 const roomsContainer = document.querySelector("#all-rooms");
+const featRoomsContainer = document.querySelector("#feat-rooms");
 
 const fakeApi = [
   {
@@ -148,6 +150,11 @@ const fakeApi = [
   }
 ]
 
+fakeApi.forEach((i) => {
+  i.rating = (Math.random() + 3.5).toFixed(1)
+  i.ratingCount = (Math.random() * 102).toFixed()
+})
+
 flatpickr("#datepicker", { 
   mode: "range",
   "locale": "pt",
@@ -165,33 +172,49 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     zoomOffset: -1
 }).addTo(mymap);
 
-const renderCard = (card) => {
+const renderNormalCard = (card) => {
   const div = document.createElement("div");
   div.className = "card";
   div.innerHTML = `
   <div class="card__img">
       <img src="${card.photo}" alt="${card.photo}">
-    </div>
-    <div class="card__header flex-spcbtw">
-      <span class="card__type text-12">${card.property_type}</span>
-      <span class="card__rating">
-        <i class="fas fa-star"></i> ${(Math.random() + 3.5).toFixed(2)}
-        <span class="card__type text-12"> (${(Math.random() * 102).toFixed()})</span>
-      </span>
-    </div>
-    <div class="card__name">
-      ${card.name}
-    </div>
-    <div class="card__price flex-spcbtw">
-      <span class="price-night">
-        R$ ${card.price} / Noite
-      </span>
-      <span class="price-total">
-        Total: R$ ${card.price * 2}
-      </span>
-    </div>
+  </div>
+  <div class="card__header flex-spcbtw">
+    <span class="card__type text-12">${card.property_type}</span>
+    <span class="card__rating">
+      <i class="fas fa-star"></i> ${card.rating}
+      <span class="card__type text-12"> (${card.ratingCount})</span>
+    </span>
+  </div>
+  <div class="card__name">
+    ${card.name}
+  </div>
+  <div class="card__price flex-spcbtw">
+    <span class="price-night">
+      R$ ${card.price} / Noite
+    </span>
+    <span class="price-total">
+      Total: R$ ${card.price * 2}
+    </span>
+  </div>
 `;
   roomsContainer.appendChild(div);
 };
 
-fakeApi.forEach((card) => renderCard(card))
+const renderFeatCard = (card) => {
+  const div = document.createElement("div");
+  div.className = "featured__room";
+  div.innerHTML = `
+  <img src="${card.photo}" alt="${card.name}" class="featured__img">
+  <div class="featured__room__medal flex-center">
+    <i class="fas fa-medal"></i>
+  </div>
+  <div class="featured__room__score flex-center">
+    <i class="fas fa-star"></i> ${card.rating}
+  </div>
+`;
+  featRoomsContainer.appendChild(div);
+};
+
+fakeApi.slice(0,4).forEach((card) => renderFeatCard(card))
+fakeApi.forEach((card) => renderNormalCard(card))

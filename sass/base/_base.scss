@@ -21,12 +21,14 @@ body {
   box-sizing: border-box;
 }
 
-// @keyframes inLeft {
-//     100% {
-//         transform: translateX(-50%);
-//         opacity: 1;
-//     }
-// }
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
 
 .container {
   margin: 0 auto 600px;
@@ -123,7 +125,8 @@ body {
     justify-content: space-between;
     align-items: center;
   }
-  &__room {
+  &__room {    
+    animation: fadeIn .2s;
     cursor: pointer;
     height: 47.5%;
     width: 48.5%;
@@ -213,6 +216,7 @@ body {
 }
 
 .card {
+  animation: fadeIn .2s;
   cursor: pointer;
   color: #555;
   width: 23.5%;
