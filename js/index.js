@@ -199,7 +199,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 }).addTo(mymap);
 // 51.508606, -0.126289
 let marker = L.marker({lon: -0.126289, lat: 51.508606}).addTo(mymap);
-mymap.panTo({lat: -22.827591, lng: -43.417488});
+mymap.panTo({lat: -22.827591, lng: -43.417488, alt: 50});
 
 const renderNormalCard = (card) => {
   const div = document.createElement("div");
