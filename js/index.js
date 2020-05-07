@@ -152,6 +152,129 @@ const fakeApi = [
   }
 ]
 
+const markers = [
+  {
+    id: 1,
+    lat: 51.508606,
+    lon: -0.126289
+  },
+  {
+    id: 2,
+    lat: 51.507006,
+    lon: -0.125117
+  },
+  {
+    id: 3,
+    lat: 51.508415,
+    lon: -0.123390
+  },
+  {
+    id: 4,
+    lat: 51.509330,
+    lon: -0.121748
+  },
+  {
+    id: 5,
+    lat: 51.510351, 
+    lon: -0.119038
+  },
+  {
+    id: 6,
+    lat: 51.508606,
+    lon: -0.126289
+  },
+  {
+    id: 7,
+    lat: 51.508606,
+    lon: -0.126289
+  },
+  {
+    id: 8,
+    lat: 51.508606,
+    lon: -0.126289
+  },
+  {
+    id: 9,
+    lat: 51.508606,
+    lon: -0.126289
+  },
+  {
+    id: 10,
+    lat: 51.508606,
+    lon: -0.126289
+  },
+  {
+    id: 11,
+    lat: 51.508606,
+    lon: -0.126289
+  },
+  {
+    id: 12,
+    lat: 51.508606,
+    lon: -0.126289
+  },
+  {
+    id: 13,
+    lat: 51.508606,
+    lon: -0.126289
+  },
+  {
+    id: 14,
+    lat: 51.508606,
+    lon: -0.126289
+  },
+  {
+    id: 15,
+    lat: 51.508606,
+    lon: -0.126289
+  },
+  {
+    id: 16,
+    lat: 51.508606,
+    lon: -0.126289
+  },
+  {
+    id: 17,
+    lat: 51.508606,
+    lon: -0.126289
+  },
+  {
+    id: 18,
+    lat: 51.508606,
+    lon: -0.126289
+  },
+  {
+    id: 19,
+    lat: 51.508606,
+    lon: -0.126289
+  },
+  {
+    id: 20,
+    lat: 51.508606,
+    lon: -0.126289
+  },
+  {
+    id: 21,
+    lat: 51.508606,
+    lon: -0.126289
+  },
+  {
+    id: 22,
+    lat: 51.508606,
+    lon: -0.126289
+  },
+  {
+    id: 23,
+    lat: 51.508606,
+    lon: -0.126289
+  },
+  {
+    id: 24,
+    lat: 51.508606,
+    lon: -0.126289
+  },
+]
+
 fakeApi.forEach((i) => {
   i.rating = (Math.random() + 4).toFixed(1)
   i.ratingCount = (Math.random() * 102).toFixed()
@@ -197,9 +320,8 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     tileSize: 512,
     zoomOffset: -1
 }).addTo(mymap);
-// 51.508606, -0.126289
-let marker = L.marker({lon: -0.126289, lat: 51.508606}).addTo(mymap);
-mymap.panTo({lat: -22.827591, lng: -43.417488, alt: 1000.00});
+
+// L.marker(obj).addTo(mymap);
 
 const renderNormalCard = (card) => {
   const div = document.createElement("div");
