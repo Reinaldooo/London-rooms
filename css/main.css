@@ -193,7 +193,7 @@ body {
   text-align: center;
   color: #ff385c; }
   .sort-by__button {
-    color: #555;
+    color: #888;
     padding: 10px 20px;
     text-transform: uppercase;
     background-color: white;
@@ -207,10 +207,15 @@ body {
     transition: box-shadow 0.2s ease 0s, -webkit-box-shadow 0.2s ease 0s;
     overflow: hidden;
     margin-left: 25px;
-    font-size: 12px; }
+    font-size: 12px;
+    font-weight: bold; }
     .sort-by__button:hover {
       -webkit-box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
               box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); }
+
+.selected {
+  background-color: #ff385c;
+  color: white; }
 
 .all-rooms {
   margin-top: 50px; }
@@ -233,11 +238,7 @@ body {
   transition: -webkit-box-shadow 0.2s ease 0s;
   transition: box-shadow 0.2s ease 0s;
   transition: box-shadow 0.2s ease 0s, -webkit-box-shadow 0.2s ease 0s;
-  overflow: hidden;
-  -webkit-transition: -webkit-box-shadow 0.5s;
-  transition: -webkit-box-shadow 0.5s;
-  transition: box-shadow 0.5s;
-  transition: box-shadow 0.5s, -webkit-box-shadow 0.5s; }
+  overflow: hidden; }
   .card i {
     color: #ff385c; }
   .card:hover {

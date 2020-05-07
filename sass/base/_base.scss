@@ -193,7 +193,7 @@ body {
   color: #ff385c;
 
   &__button {
-    color: #555;
+    color: #888;
     padding: 10px 20px;
     text-transform: uppercase;
     background-color: white;
@@ -204,11 +204,17 @@ body {
     overflow: hidden;
     margin-left: 25px;
     font-size: 12px;
+    font-weight: bold;
 
     &:hover {
       box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
     }
   }
+}
+
+.selected {  
+  background-color: #ff385c;
+  color: white;
 }
 
 .all-rooms {
@@ -229,7 +235,6 @@ body {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
   transition: box-shadow 0.2s ease 0s;
   overflow: hidden;
-  transition: box-shadow 0.5s;
 
   & i {
     color: #ff385c;

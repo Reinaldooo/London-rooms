@@ -5,8 +5,6 @@ let numDays = null;
 const roomsContainer = document.querySelector("#all-rooms");
 const featRoomsContainer = document.querySelector("#feat-rooms");
 
-console.log(data[0])
-
 const fakeApi = [
   {
     "photo": "https://a0.muscache.com/im/pictures/e6c4b347-49c7-4840-8c00-df36a2a273da.jpg?aki_policy=x_large",
@@ -189,7 +187,6 @@ flatpickr("#datepicker", {
   }
 });
 
-
 let mymap = L.map('map', {
   scrollWheelZoom: false
 }).setView([51.505, -0.09], 13);
@@ -245,10 +242,20 @@ const renderFeatCard = (card) => {
   featRoomsContainer.appendChild(div);
 };
 
-fakeApi.slice(0,4).forEach(renderFeatCard)
+fakeApi.slice(8,12).forEach(renderFeatCard)
 fakeApi.forEach(renderNormalCard)
 
+let buttons = document.querySelectorAll(".sort-by__button")
+buttons.forEach((btn) => btn.addEventListener('click', () => {
+  // Remove 'selected' class from other buttons
+  buttons.forEach((b) => b.classList.remove("selected"))
+  // Add it to current button
+  btn.classList.add("selected")
+  filterBy(btn.dataset.type)
+}))
+
 const filterBy = (filter) => {
+  lastFilter = filter
   let newArr;
   if(filter.startsWith('rat')) {
     // Sort top to bottom if its rating or ratingCount

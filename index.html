@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width" />
     <title>London Roooms</title>
     <link rel="stylesheet" href="./css/normalize.css" />
     <link rel="stylesheet" href="./css/all.min.css" />
@@ -42,16 +42,16 @@
 
       <section class="sort-by">
         Classificar por: 
-        <button class="sort-by__button" onclick="filterBy('price')">
+        <button class="sort-by__button" data-type="price">
           preço
         </button>
-        <button class="sort-by__button" onclick="filterBy('property_type')">
+        <button class="sort-by__button" data-type="property_type">
           tipo
         </button>
-        <button class="sort-by__button" onclick="filterBy('rating')">
+        <button class="sort-by__button" data-type="rating">
           nota
         </button>
-        <button class="sort-by__button" onclick="filterBy('ratingCount')">
+        <button class="sort-by__button" data-type="ratingCount">
           mais avaliados
         </button>
       </section>
