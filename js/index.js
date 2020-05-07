@@ -180,98 +180,98 @@ const markers = [
   },
   {
     id: 6,
-    lat: 51.508606,
-    lon: -0.126289
+    lat: 51.512506, 
+    lon: -0.105305
   },
   {
     id: 7,
-    lat: 51.508606,
-    lon: -0.126289
+    lat: 51.511878, 
+    lon: -0.106670
   },
   {
     id: 8,
-    lat: 51.508606,
-    lon: -0.126289
+    lat: 51.511618, 
+    lon: -0.102132
   },
   {
     id: 9,
-    lat: 51.508606,
-    lon: -0.126289
+    lat: 51.508141, 
+    lon: -0.102479
   },
   {
     id: 10,
-    lat: 51.508606,
-    lon: -0.126289
+    lat: 51.507052, 
+    lon: -0.100784
   },
   {
     id: 11,
-    lat: 51.508606,
-    lon: -0.126289
+    lat: 51.505963, 
+    lon: -0.102372
   },
   {
     id: 12,
-    lat: 51.508606,
-    lon: -0.126289
+    lat: 51.505083, 
+    lon: -0.106971
   },
   {
     id: 13,
-    lat: 51.508606,
-    lon: -0.126289
+    lat: 51.504083, 
+    lon: -0.107609
   },
   {
     id: 14,
-    lat: 51.508606,
-    lon: -0.126289
+    lat: 51.502126, 
+    lon: -0.108532
   },
   {
     id: 15,
-    lat: 51.508606,
-    lon: -0.126289
+    lat: 51.501929, 
+    lon: -0.102897
   },
   {
     id: 16,
-    lat: 51.508606,
-    lon: -0.126289
+    lat: 51.501922,
+    lon: -0.098638
   },
   {
     id: 17,
-    lat: 51.508606,
-    lon: -0.126289
+    lat: 51.500841,
+    lon: -0.102445
   },
   {
     id: 18,
-    lat: 51.508606,
-    lon: -0.126289
+    lat: 51.499021, 
+    lon: -0.093296
   },
   {
     id: 19,
-    lat: 51.508606,
-    lon: -0.126289
+    lat: 51.497084, 
+    lon: -0.098188
   },
   {
     id: 20,
-    lat: 51.508606,
-    lon: -0.126289
+    lat: 51.495995, 
+    lon: -0.104411
   },
   {
     id: 21,
-    lat: 51.508606,
-    lon: -0.126289
+    lat: 51.498653, 
+    lon: -0.109388
   },
   {
     id: 22,
-    lat: 51.508606,
-    lon: -0.126289
+    lat: 51.498079, 
+    lon: -0.112961
   },
   {
     id: 23,
-    lat: 51.508606,
-    lon: -0.126289
+    lat: 51.508117, 
+    lon: -0.105065
   },
   {
     id: 24,
-    lat: 51.508606,
-    lon: -0.126289
+    lat: 51.511910, 
+    lon: -0.107672
   },
 ]
 
@@ -321,14 +321,14 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     zoomOffset: -1
 }).addTo(mymap);
 
-// L.marker(obj).addTo(mymap);
+markers.forEach(({ lat,lon }) => L.marker({lat, lon}).addTo(mymap))
 
 const renderNormalCard = (card) => {
   const div = document.createElement("div");
   div.className = "card";
   div.innerHTML = `
   <div class="card__img">
-      <img src="${card.photo}" alt="${card.photo}">
+      <img src="https://a0.muscache.com/im/pictures/e6c4b347-49c7-4840-8c00-df36a2a273da.jpg?aki_policy=x_large" alt="${card.name}">
   </div>
   <div class="card__header flex-spcbtw">
     <span class="card__type text-12">${card.property_type}</span>
@@ -373,9 +373,9 @@ fakeApi.forEach(renderNormalCard)
 let buttons = document.querySelectorAll(".sort-by__button")
 buttons.forEach((btn) => btn.addEventListener('click', () => {
   // Remove 'selected' class from other buttons
-  buttons.forEach((b) => b.classList.remove("selected"))
+  buttons.forEach((b) => b.classList.remove("button-selected"))
   // Add it to current button
-  btn.classList.add("selected")
+  btn.classList.add("button-selected")
   filterBy(btn.dataset.type)
 }))
 
