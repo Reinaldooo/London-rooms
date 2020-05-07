@@ -60,7 +60,8 @@ body {
   .topbar__logo {
     font-family: "Catamaran", sans-serif;
     color: #ff385c;
-    font-size: 35px; }
+    font-size: 35px;
+    cursor: pointer; }
   .topbar__user {
     border-radius: 10px;
     display: -webkit-box;

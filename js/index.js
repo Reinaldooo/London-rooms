@@ -199,6 +199,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 }).addTo(mymap);
 // 51.508606, -0.126289
 let marker = L.marker({lon: -0.126289, lat: 51.508606}).addTo(mymap);
+mymap.panTo({lat: -22.827591, lng: -43.417488});
 
 const renderNormalCard = (card) => {
   const div = document.createElement("div");
@@ -244,7 +245,7 @@ const renderFeatCard = (card) => {
   featRoomsContainer.appendChild(div);
 };
 
-fakeApi.slice(8,12).forEach(renderFeatCard)
+[...fakeApi].sort((a,b) => a.rating < b.rating).slice(0,4).forEach(renderFeatCard)
 fakeApi.forEach(renderNormalCard)
 
 let buttons = document.querySelectorAll(".sort-by__button")
