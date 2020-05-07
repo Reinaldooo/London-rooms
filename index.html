@@ -29,7 +29,7 @@
       </header>
 
       <div class="options">
-        <input type="date" id="datepicker" class="options__dates" placeholder="Check-in / Check-out">
+        <input type="date" id="datepicker" class="options__dates" placeholder="Please select the date range">
       </div>
       <section class="featured flex-spcbtw">
         <div id="map" class="featured__map">
@@ -42,14 +42,17 @@
 
       <section class="sort-by">
         Classificar por: 
-        <button class="sort-by__button">
+        <button class="sort-by__button" onclick="filterBy('price')">
           preço
         </button>
-        <button class="sort-by__button">
+        <button class="sort-by__button" onclick="filterBy('property_type')">
           tipo
         </button>
-        <button class="sort-by__button">
+        <button class="sort-by__button" onclick="filterBy('rating')">
           nota
+        </button>
+        <button class="sort-by__button" onclick="filterBy('ratingCount')">
+          mais avaliados
         </button>
       </section>
 

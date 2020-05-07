@@ -1,7 +1,11 @@
 const apiUrl = "https://api.sheety.co/30b6e400-9023-4a15-8e6c-16aa4e3b1e72";
 let data = [];
+let lastFilter = ''
+let numDays = null;
 const roomsContainer = document.querySelector("#all-rooms");
 const featRoomsContainer = document.querySelector("#feat-rooms");
+
+console.log(data[0])
 
 const fakeApi = [
   {
@@ -151,15 +155,40 @@ const fakeApi = [
 ]
 
 fakeApi.forEach((i) => {
-  i.rating = (Math.random() + 3.5).toFixed(1)
+  i.rating = (Math.random() + 4).toFixed(1)
   i.ratingCount = (Math.random() * 102).toFixed()
 })
+
+function days_between(date1, date2) {
+  // The number of milliseconds in one day
+  const ONE_DAY = 1000 * 60 * 60 * 24;
+  // Calculate the difference in milliseconds
+  const differenceMs = Math.abs(date1 - date2);
+  // Convert back to days and return
+  return Math.round(differenceMs / ONE_DAY);
+}
+
+function updateCardsTotal(num) {
+  // update num to one if it is zero
+  num = num ? num : 1
+  numDays = num
+  if(lastFilter) {
+    filterBy(lastFilter)
+    return
+  }
+  roomsContainer.innerHTML = ""
+  fakeApi.forEach(renderNormalCard)
+}
 
 flatpickr("#datepicker", { 
   mode: "range",
   "locale": "pt",
   dateFormat: "d-m-Y",
+  onClose: function(selected) {
+    updateCardsTotal(days_between(selected[0], selected[1]))
+  }
 });
+
 
 let mymap = L.map('map', {
   scrollWheelZoom: false
@@ -194,7 +223,7 @@ const renderNormalCard = (card) => {
       R$ ${card.price} / Noite
     </span>
     <span class="price-total">
-      Total: R$ ${card.price * 2}
+      ${numDays ? `Total: R$ ${card.price * numDays}` : ""}
     </span>
   </div>
 `;
@@ -216,5 +245,17 @@ const renderFeatCard = (card) => {
   featRoomsContainer.appendChild(div);
 };
 
-fakeApi.slice(0,4).forEach((card) => renderFeatCard(card))
-fakeApi.forEach((card) => renderNormalCard(card))
+fakeApi.slice(0,4).forEach(renderFeatCard)
+fakeApi.forEach(renderNormalCard)
+
+const filterBy = (filter) => {
+  let newArr;
+  if(filter.startsWith('rat')) {
+    // Sort top to bottom if its rating or ratingCount
+    newArr = fakeApi.sort((a,b) => a[filter] < b[filter])    
+  } else {
+    newArr = fakeApi.sort((a,b) => a[filter] > b[filter])
+  }
+  roomsContainer.innerHTML = ""
+  newArr.forEach(renderNormalCard)
+}
