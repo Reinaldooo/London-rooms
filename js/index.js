@@ -1,6 +1,8 @@
 const apiUrl = "https://api.sheety.co/30b6e400-9023-4a15-8e6c-16aa4e3b1e72";
 let data = [];
 let lastFilter = ''
+let featMarkers = {}
+let featCount = 0
 let numDays = null;
 const roomsContainer = document.querySelector("#all-rooms");
 const featRoomsContainer = document.querySelector("#feat-rooms");
@@ -275,9 +277,10 @@ const markers = [
   },
 ]
 
-fakeApi.forEach((i) => {
+fakeApi.forEach((i, idx) => {
   i.rating = (Math.random() + 4).toFixed(1)
   i.ratingCount = (Math.random() * 102).toFixed()
+  i.coords = markers[idx]
 })
 
 function days_between(date1, date2) {
@@ -321,14 +324,23 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     zoomOffset: -1
 }).addTo(mymap);
 
-markers.forEach(({ lat,lon }) => L.marker({lat, lon}).addTo(mymap))
+fakeApi.forEach(({ coords, price }, idx) => {
+  let mkr = L.marker({lat: coords.lat, lon: coords.lon}, {
+    riseOnHover: true, id: coords.id
+  })
+  mkr.addTo(mymap).bindTooltip(`<b>R$ ${price}</b>`)
+  mkr.on('click', () => mymap.panTo(coords));
+  if (idx < 4) {
+    featMarkers[`marker${idx}`] =  mkr
+  }
+})
 
 const renderNormalCard = (card) => {
   const div = document.createElement("div");
   div.className = "card";
   div.innerHTML = `
   <div class="card__img">
-      <img src="https://a0.muscache.com/im/pictures/e6c4b347-49c7-4840-8c00-df36a2a273da.jpg?aki_policy=x_large" alt="${card.name}">
+      <img src="${card.photo}" alt="${card.name}">
   </div>
   <div class="card__header flex-spcbtw">
     <span class="card__type text-12">${card.property_type}</span>
@@ -363,12 +375,16 @@ const renderFeatCard = (card) => {
   <div class="featured__room__score flex-center">
     <i class="fas fa-star"></i> ${card.rating}
   </div>
-`;
+`;  
+  let pty = `marker${featCount}`
+  div.addEventListener('click', () => mymap.panTo({ 
+    lat: card.coords.lat, lon: card.coords.lon 
+  }))
+  div.addEventListener('mouseenter', () => featMarkers[pty].openTooltip())
+  div.addEventListener('mouseleave', () => featMarkers[pty].closeTooltip())
+  featCount++
   featRoomsContainer.appendChild(div);
 };
-
-[...fakeApi].sort((a,b) => a.rating < b.rating).slice(0,4).forEach(renderFeatCard)
-fakeApi.forEach(renderNormalCard)
 
 let buttons = document.querySelectorAll(".sort-by__button")
 buttons.forEach((btn) => btn.addEventListener('click', () => {
@@ -380,6 +396,7 @@ buttons.forEach((btn) => btn.addEventListener('click', () => {
 }))
 
 const filterBy = (filter) => {
+  if(filter === lastFilter) return;
   lastFilter = filter
   let newArr;
   if(filter.startsWith('rat')) {
@@ -391,3 +408,6 @@ const filterBy = (filter) => {
   roomsContainer.innerHTML = ""
   newArr.forEach(renderNormalCard)
 }
+
+fakeApi.slice(0,4).forEach(renderFeatCard)
+filterBy("price")

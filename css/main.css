@@ -213,6 +213,9 @@ body {
     .sort-by__button:hover {
       -webkit-box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
               box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); }
+    .sort-by__button:active {
+      -webkit-transform: scale(1.1);
+              transform: scale(1.1); }
 
 .button-selected {
   background-color: #ff385c;
