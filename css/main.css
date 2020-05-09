@@ -27,9 +27,12 @@ body {
   display: none; }
 
 .container {
-  margin: 0 auto 200px;
+  margin: 0 auto;
   width: 75%;
   max-width: 1200px; }
+  @media screen and (max-width: 500px) {
+    .container {
+      width: 100%; } }
 
 .flex-spcbtw {
   display: -webkit-box;
@@ -83,6 +86,9 @@ body {
     transition: -webkit-box-shadow 0.2s ease 0s;
     transition: box-shadow 0.2s ease 0s;
     transition: box-shadow 0.2s ease 0s, -webkit-box-shadow 0.2s ease 0s; }
+    @media screen and (max-width: 500px) {
+      .topbar__user {
+        display: none; } }
     .topbar__user:hover {
       -webkit-box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
               box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); }
@@ -116,12 +122,19 @@ body {
 
 .featured {
   margin: 40px 0;
-  width: 100%; }
+  width: 100%;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
   .featured__map {
     height: 400px;
     width: 47.5%;
     border-radius: 10px;
     overflow: hidden; }
+    @media screen and (max-width: 500px) {
+      .featured__map {
+        width: 90%;
+        height: 200px;
+        margin: 0 auto; } }
   .featured__rooms {
     height: 400px;
     width: 47.5%;
@@ -136,6 +149,11 @@ body {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center; }
+    @media screen and (max-width: 500px) {
+      .featured__rooms {
+        width: 90%;
+        height: 300px;
+        margin: 10px auto; } }
   .featured__room {
     -webkit-animation: fadeIn .2s;
             animation: fadeIn .2s;
@@ -213,19 +231,47 @@ body {
     margin-left: 25px;
     font-size: 12px;
     font-weight: bold; }
+    @media screen and (max-width: 500px) {
+      .sort-by__button {
+        display: none; } }
     .sort-by__button:hover {
       -webkit-box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
               box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); }
     .sort-by__button:active {
       -webkit-transform: scale(1.1);
               transform: scale(1.1); }
+  .sort-by__select {
+    border: none;
+    margin-left: 10px;
+    width: 50%;
+    height: 40px;
+    color: #888;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+    -webkit-transition: -webkit-box-shadow 0.2s ease 0s;
+    transition: -webkit-box-shadow 0.2s ease 0s;
+    transition: box-shadow 0.2s ease 0s;
+    transition: box-shadow 0.2s ease 0s, -webkit-box-shadow 0.2s ease 0s;
+    overflow: hidden;
+    font-size: 12px;
+    font-weight: bold; }
+    @media screen and (min-width: 500px) {
+      .sort-by__select {
+        display: none; } }
 
 .button-selected {
   background-color: #ff385c;
   color: white; }
 
 .all-rooms {
-  margin-top: 50px; }
+  margin-top: 50px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
 
 .card {
   -webkit-animation: fadeIn .2s;
@@ -247,6 +293,10 @@ body {
   transition: box-shadow 0.2s ease 0s, -webkit-box-shadow 0.2s ease 0s;
   overflow: hidden;
   position: relative; }
+  @media screen and (max-width: 500px) {
+    .card {
+      width: 80%;
+      margin: 0 auto 20px; } }
   .card i {
     color: #ff385c; }
   .card:hover {
@@ -279,7 +329,8 @@ body {
     bottom: 5%; }
 
 .pages {
-  margin: 20px auto; }
+  margin: 20px auto;
+  width: 100%; }
   .pages__button {
     color: #888;
     padding: 10px 20px;
@@ -294,7 +345,6 @@ body {
     transition: box-shadow 0.2s ease 0s;
     transition: box-shadow 0.2s ease 0s, -webkit-box-shadow 0.2s ease 0s;
     overflow: hidden;
-    margin-left: 25px;
     font-size: 12px;
     font-weight: bold; }
     .pages__button:disabled {
@@ -309,6 +359,10 @@ body {
       font-size: 18px; }
     .pages__button + .pages__button {
       margin-left: 20px; }
+
+.footer {
+  height: 200px;
+  background-color: red; }
 
 .loader,
 .loader:before,

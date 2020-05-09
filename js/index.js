@@ -17,6 +17,20 @@ const filterBy = (arr, filter) => {
   return arr.sort((a, b) => a[filter] > b[filter]);
 };
 
+const handleSelect = () => {
+  const select = document.querySelector("select");
+  paginationHandler.renderPage(1, select.value)
+}
+
+const updateApiImgSize = (img, size) => {
+  if (size) {
+    let tmp = img.split("=")
+    tmp[tmp.length - 1] = size
+    return tmp.join("=")
+  }
+  return img
+}
+
 function days_between(date1, date2) {
   // The number of milliseconds in one day
   const ONE_DAY = 1000 * 60 * 60 * 24;
@@ -41,6 +55,7 @@ const init = () => {
     i.rating = (Math.random() + 4).toFixed(1);
     i.ratingCount = Math.round(Math.random() * 102);
     i.coords = markers[idx];
+    i.photo = updateApiImgSize(i.photo, "large")
   });
   // flatpickr init
   flatpickr("#datepicker", {

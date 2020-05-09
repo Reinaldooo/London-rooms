@@ -54,12 +54,22 @@
         <button class="sort-by__button" data-type="ratingCount">
           mais avaliados
         </button>
+        <!-- This 'select' only appears on mobile -->
+        <select class="sort-by__select" onchange="handleSelect()">
+          <option value="price" selected>Preço</option>
+          <option value="property_type">Tipo</option>
+          <option value="rating">Nota</option>
+          <option value="ratingCount">Mais Avaliados</option>
+        </select>
       </section>
 
       <section id="all-rooms" class="all-rooms flex-spcbtw">
       </section>
       <section id="pages" class="pages flex-center">        
       </section>
+      <footer class="footer">
+
+      </footer>
     </div>
     <!-- Scripts -->
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
