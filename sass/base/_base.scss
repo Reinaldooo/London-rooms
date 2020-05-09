@@ -298,7 +298,7 @@ body {
   position: relative;
   
   @media screen and (max-width: 500px) {
-    width: 80%;
+    width: 90%;
     margin: 0 auto 20px;
   }
 
@@ -383,8 +383,23 @@ body {
 }
 
 .footer {
-  height: 200px;
-  background-color: red;
+  padding: 40px 0;
+  flex-direction: column;
+  color: #555;
+
+  &__icons {
+    margin-top: 20px;
+  }
+
+  & a {
+    font-size: 40px;
+    text-decoration: none;
+    color: #555;
+
+    &:first-of-type {
+      margin-right: 10px;
+    }
+  }
 }
 
 // Spinner

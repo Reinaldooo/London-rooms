@@ -295,7 +295,7 @@ body {
   position: relative; }
   @media screen and (max-width: 500px) {
     .card {
-      width: 80%;
+      width: 90%;
       margin: 0 auto 20px; } }
   .card i {
     color: #ff385c; }
@@ -361,8 +361,20 @@ body {
       margin-left: 20px; }
 
 .footer {
-  height: 200px;
-  background-color: red; }
+  padding: 40px 0;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  color: #555; }
+  .footer__icons {
+    margin-top: 20px; }
+  .footer a {
+    font-size: 40px;
+    text-decoration: none;
+    color: #555; }
+    .footer a:first-of-type {
+      margin-right: 10px; }
 
 .loader,
 .loader:before,
