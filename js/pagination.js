@@ -11,17 +11,17 @@ const renderPageButtons = (page) => {
     <i class="fas fa-arrow-circle-left"></i>
   </button>
   <button class="pages__button ${checkPageNum(1)}"
-    onclick="paginationHandler.renderPage(1)"
+    onclick="paginationHandler.renderPage(1, null, true)"
   >
     1
   </button>
   <button class="pages__button ${checkPageNum(2)}"
-    onclick="paginationHandler.renderPage(2)"
+    onclick="paginationHandler.renderPage(2, null, true)"
   >
     2
   </button>
   <button class="pages__button ${checkPageNum(3)}"
-    onclick="paginationHandler.renderPage(3)"
+    onclick="paginationHandler.renderPage(3, null, true)"
   >
     3
   </button>
@@ -46,8 +46,9 @@ const paginationHandler = {
     this.page--
     this.renderPage()
   },  
-  renderPage: function(page, filter) {
-    if (page-1 === this.page) return;
+  renderPage: function(page, filter, noFilter) {
+    if (filter === lastFilter) return;
+    if (page-1 === this.page && noFilter) return;
     if (page) this.page = page-1;
     if (!filter) filter = lastFilter;
     // dataToShow = originalData.slice(this.page*8, (this.page*8)+8)
