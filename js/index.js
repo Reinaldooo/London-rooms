@@ -1,287 +1,151 @@
 const apiUrl = "https://api.sheety.co/30b6e400-9023-4a15-8e6c-16aa4e3b1e72";
-let data = [];
-let lastFilter = ''
-let featMarkers = {}
-let featCount = 0
+let originalData = null;
+let data = null;
+let lastFilter = "";
+let featMarkers = {};
+let featCount = 0;
 let numDays = null;
 const roomsContainer = document.querySelector("#all-rooms");
 const featRoomsContainer = document.querySelector("#feat-rooms");
-
-const fakeApi = [
-  {
-    "photo": "https://a0.muscache.com/im/pictures/e6c4b347-49c7-4840-8c00-df36a2a273da.jpg?aki_policy=x_large",
-    "property_type": "Apartamento",
-    "name": "Apartment in Son Parc, wonderful views",
-    "price": 433
-  },
-  {
-    "photo": "https://a0.muscache.com/im/pictures/4a5326cb-95e4-4220-a4d8-c91f50cf784c.jpg?aki_policy=xx_large",
-    "property_type": "Apartamento",
-    "name": "APARTAMENTO IDEAL PAREJAS EN SON PARC",
-    "price": 368
-  },
-  {
-    "photo": "https://a0.muscache.com/im/pictures/77a102a4-cf65-475e-be60-4d592307ab4a.jpg?aki_policy=xx_large",
-    "property_type": "Casa",
-    "name": "Casa Charmosa Bem Localizada",
-    "price": 70
-  },
-  {
-    "photo": "https://a0.muscache.com/im/pictures/83de85c5-ce24-4cc4-ae85-dfb2300b4a06.jpg?aki_policy=xx_large",
-    "property_type": "Casa",
-    "name": "Quartos pertinho do Anhembi!",
-    "price": 189
-  },
-  {
-    "photo": "https://a0.muscache.com/im/pictures/d5dbb5b2-12a3-4de5-87d0-5a66841eb731.jpg?aki_policy=xx_large",
-    "property_type": "Chácara",
-    "name": "Charming Chalet, private pool, free AC & WiFi",
-    "price": 737
-  },
-  {
-    "photo": "https://a0.muscache.com/im/pictures/ce7dd48a-8125-4cea-a1b7-27ce0068d5d8.jpg?aki_policy=x_large",
-    "property_type": "Chácara",
-    "name": "Menorca Green Park C7",
-    "price": 520
-  },
-  {
-    "photo": "https://a0.muscache.com/im/pictures/bea86611-2f82-487a-a62e-17ab268515de.jpg?aki_policy=xx_large",
-    "property_type": "Chácara",
-    "name": "Villa Monty",
-    "price": 1291
-  },
-  {
-    "photo": "https://a0.muscache.com/im/pictures/4cfeba0b-a0c3-4ae4-87c9-5e9349608814.jpg?aki_policy=xx_large",
-    "property_type": "Estúdio",
-    "name": "Bonito penthouse cerca del aeropuerto CDMX",
-    "price": 73
-  },
-  {
-    "photo": "https://a0.muscache.com/im/pictures/ac081c48-0161-4cde-a0e6-77b3bd933f94.jpg?aki_policy=xx_large",
-    "property_type": "Estúdio",
-    "name": "The Backpacker's Retreat - Balcony",
-    "price": 51
-  },
-  {
-    "photo": "https://a0.muscache.com/im/pictures/dc72255f-7965-4964-b89e-7bfb9f4aa939.jpg?aki_policy=x_large",
-    "property_type": "Estúdio",
-    "name": "10min airport, Foro Sol, Palacio de los Deportes",
-    "price": 81
-  },
-  {
-    "photo": "https://a0.muscache.com/im/pictures/60f11b07-3aa2-4e03-ac03-6a0c12fbc35b.jpg?aki_policy=x_large",
-    "property_type": "Estúdio",
-    "name": "Acogedor depto cerca aeropuerto, foro Sol, Centro",
-    "price": 77
-  },
-  {
-    "photo": "https://a0.muscache.com/im/pictures/f2379eb0-d77e-4a99-9df5-f16032693f0d.jpg?aki_policy=xx_large",
-    "property_type": "Loft",
-    "name": "Sol Nascente da Prainha",
-    "price": 200
-  },
-  {
-    "photo": "https://a0.muscache.com/im/pictures/5ed611f3-fb3f-489e-b1cb-d5f26ea80c4c.jpg?aki_policy=xx_large",
-    "property_type": "Loft",
-    "name": "Ap novo com wi-fi na Prainha - Arraial do Cabo",
-    "price": 145
-  },
-  {
-    "photo": "https://a0.muscache.com/im/pictures/207ef44d-fbe6-4fcd-9824-91b65de4b3cb.jpg?aki_policy=xx_large",
-    "property_type": "Quarto",
-    "name": "Suite @ Subway Trianon Masp",
-    "price": 69
-  },
-  {
-    "photo": "https://a0.muscache.com/im/pictures/f94985db-d4db-4c10-8b9b-82342746601d.jpg?aki_policy=x_large",
-    "property_type": "Quarto",
-    "name": "Quarto Arouche Centro SP Ótima Localização",
-    "price": 45
-  },
-  {
-    "photo": "https://a0.muscache.com/im/pictures/8b397c47-01af-4476-9fb8-784ab4df2c91.jpg?aki_policy=xx_large",
-    "property_type": "Quarto",
-    "name": "Quarto 1 - Parque da Aclimacão",
-    "price": 55
-  },
-  {
-    "photo": "https://a0.muscache.com/im/pictures/c3c6432f-b140-4768-8d61-c160e639b7a8.jpg?aki_policy=x_large",
-    "property_type": "Quarto",
-    "name": "Existe amor em SP",
-    "price": 55
-  },
-  {
-    "photo": "https://a0.muscache.com/im/pictures/306e0369-ab79-40be-bdb7-c87340dcdbc1.jpg?aki_policy=xx_large",
-    "property_type": "Quarto",
-    "name": "Confortável quarto de casal px. à Av. Paulista",
-    "price": 80
-  },
-  {
-    "photo": "https://a0.muscache.com/im/pictures/f5abd356-8a66-495b-b00b-877e7eae0323.jpg?aki_policy=xx_large",
-    "property_type": "Quarto",
-    "name": "Room Higienopolis São Paulo",
-    "price": 80
-  },
-  {
-    "photo": "https://a0.muscache.com/im/pictures/f1899868-21d0-44c2-b253-8b927821e178.jpg?aki_policy=xx_large",
-    "property_type": "Quarto",
-    "name": "Confortável quarto solteiro px. à Av. Paulista",
-    "price": 80
-  },
-  {
-    "photo": "https://a0.muscache.com/im/pictures/6b46fa03-8ef3-4370-8158-390935279dcf.jpg?aki_policy=xx_large",
-    "property_type": "Quarto",
-    "name": "Modern, Cozy + all you need! Muito aconchegante!!",
-    "price": 66
-  },
-  {
-    "photo": "https://a0.muscache.com/im/pictures/f074bead-ee2d-4c91-a958-2a0360e1ad7c.jpg?aki_policy=xx_large",
-    "property_type": "Sítio",
-    "name": "Recanto Rosana - Quartos e estrutura completa",
-    "price": 39
-  },
-  {
-    "photo": "https://a0.muscache.com/im/pictures/de890df5-1279-481f-989c-97847f8482cd.jpg?aki_policy=xx_large",
-    "property_type": "Sítio",
-    "name": "Suite na Montanha - Refúgio do Artista",
-    "price": 77
-  },
-  {
-    "photo": "https://a0.muscache.com/im/pictures/17b61b71-3b06-4cec-bf8f-f32daea24f39.jpg?aki_policy=xx_large",
-    "property_type": "Sítio",
-    "name": "Sítio Costa do Sol",
-    "price": 100
-  }
-]
 
 const markers = [
   {
     id: 1,
     lat: 51.508606,
-    lon: -0.126289
+    lon: -0.126289,
   },
   {
     id: 2,
     lat: 51.507006,
-    lon: -0.125117
+    lon: -0.125117,
   },
   {
     id: 3,
     lat: 51.508415,
-    lon: -0.123390
+    lon: -0.12339,
   },
   {
     id: 4,
-    lat: 51.509330,
-    lon: -0.121748
+    lat: 51.50933,
+    lon: -0.121748,
   },
   {
     id: 5,
-    lat: 51.510351, 
-    lon: -0.119038
+    lat: 51.510351,
+    lon: -0.119038,
   },
   {
     id: 6,
-    lat: 51.512506, 
-    lon: -0.105305
+    lat: 51.512506,
+    lon: -0.105305,
   },
   {
     id: 7,
-    lat: 51.511878, 
-    lon: -0.106670
+    lat: 51.511878,
+    lon: -0.10667,
   },
   {
     id: 8,
-    lat: 51.519795, 
-    lon: -0.138449
+    lat: 51.519795,
+    lon: -0.138449,
   },
   {
     id: 9,
-    lat: 51.520636, 
-    lon: -0.147461 
+    lat: 51.520636,
+    lon: -0.147461,
   },
   {
     id: 10,
-    lat: 51.516090, 
-    lon: -0.150755
+    lat: 51.51609,
+    lon: -0.150755,
   },
   {
     id: 11,
-    lat: 51.517085, 
-    lon: -0.138806
+    lat: 51.517085,
+    lon: -0.138806,
   },
   {
     id: 12,
     lat: 51.497336,
-    lon: -0.137397
+    lon: -0.137397,
   },
   {
     id: 13,
-    lat: 51.493889, 
-    lon: -0.128986
+    lat: 51.493889,
+    lon: -0.128986,
   },
   {
     id: 14,
-    lat: 51.490963, 
-    lon: -0.137730
+    lat: 51.490963,
+    lon: -0.13773,
   },
   {
     id: 15,
-    lat: 51.501929, 
-    lon: -0.102897
+    lat: 51.501929,
+    lon: -0.102897,
   },
   {
     id: 16,
     lat: 51.501922,
-    lon: -0.098638
+    lon: -0.098638,
   },
   {
     id: 17,
     lat: 51.500841,
-    lon: -0.102445
+    lon: -0.102445,
   },
   {
     id: 18,
-    lat: 51.499021, 
-    lon: -0.093296
+    lat: 51.499021,
+    lon: -0.093296,
   },
   {
     id: 19,
-    lat: 51.497084, 
-    lon: -0.098188
+    lat: 51.497084,
+    lon: -0.098188,
   },
   {
     id: 20,
-    lat: 51.495995, 
-    lon: -0.104411
+    lat: 51.495995,
+    lon: -0.104411,
   },
   {
     id: 21,
-    lat: 51.498653, 
-    lon: -0.109388
+    lat: 51.498653,
+    lon: -0.109388,
   },
   {
     id: 22,
-    lat: 51.498079, 
-    lon: -0.112961
+    lat: 51.498079,
+    lon: -0.112961,
   },
   {
     id: 23,
-    lat: 51.508117, 
-    lon: -0.105065
+    lat: 51.508117,
+    lon: -0.105065,
   },
   {
     id: 24,
-    lat: 51.511910, 
-    lon: -0.107672
+    lat: 51.51191,
+    lon: -0.107672,
   },
-]
+];
 
-fakeApi.forEach((i, idx) => {
-  i.rating = (Math.random() + 4).toFixed(1)
-  i.ratingCount = (Math.random() * 102).toFixed()
-  i.coords = markers[idx]
-})
+const filterBy = (arr, filter, updatingTotal) => {
+  console.log(arr, "arr")
+  if (filter === lastFilter && !updatingTotal) return;
+  lastFilter = filter;
+  let newArr;
+  if (filter.startsWith("rat")) {
+    // Sort top to bottom if its rating or ratingCount
+    newArr = arr.sort((a, b) => a[filter] < b[filter]);
+  } else {
+    newArr = arr.sort((a, b) => a[filter] > b[filter]);
+  }
+  roomsContainer.innerHTML = "";
+  console.log(newArr, "new")
+  newArr.forEach(renderNormalCard);
+};
 
 function days_between(date1, date2) {
   // The number of milliseconds in one day
@@ -292,48 +156,17 @@ function days_between(date1, date2) {
   return Math.round(differenceMs / ONE_DAY);
 }
 
-function updateCardsTotal(num) {
+function updateCardsTotal(arr, num) {
   // update num to one if it is zero
-  num = num ? num : 1
-  numDays = num
-  if(lastFilter) {
-    filterBy(lastFilter)
-    return
+  num = num ? num : 1;
+  numDays = num;
+  if (lastFilter) {
+    filterBy(data, lastFilter, true);
+    return;
   }
-  roomsContainer.innerHTML = ""
-  fakeApi.forEach(renderNormalCard)
+  roomsContainer.innerHTML = "";
+  arr.forEach(renderNormalCard);
 }
-
-flatpickr("#datepicker", { 
-  mode: "range",
-  "locale": "pt",
-  dateFormat: "d-m-Y",
-  onClose: function(selected) {
-    updateCardsTotal(days_between(selected[0], selected[1]))
-  }
-});
-
-let mymap = L.map('map', {
-  scrollWheelZoom: false
-}).setView({lat: 51.509334, lon: -0.114883}, 13);
-L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoicmVpbmFsZG9vbyIsImEiOiJjazl2a3g1ZXAwMDlxM2dvNGJ5M3ZjZDJ3In0.1B7OE0PYPCDADiruf5hh7A', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1
-}).addTo(mymap);
-
-fakeApi.forEach(({ coords, price }, idx) => {
-  let mkr = L.marker({lat: coords.lat, lon: coords.lon}, {
-    riseOnHover: true, id: coords.id
-  })
-  mkr.addTo(mymap).bindTooltip(`<b>R$ ${price}</b>`)
-  mkr.on('click', () => mymap.panTo(coords));
-  if (idx < 4) {
-    featMarkers[`marker${idx}`] =  mkr
-  }
-})
 
 const renderNormalCard = (card) => {
   const div = document.createElement("div");
@@ -364,50 +197,168 @@ const renderNormalCard = (card) => {
   roomsContainer.appendChild(div);
 };
 
-const renderFeatCard = (card) => {
-  const div = document.createElement("div");
-  div.className = "featured__room";
-  div.innerHTML = `
-  <img src="${card.photo}" alt="${card.name}" class="featured__img">
-  <div class="featured__room__medal flex-center">
-    <i class="fas fa-medal"></i>
-  </div>
-  <div class="featured__room__score flex-center">
-    <i class="fas fa-star"></i> ${card.rating}
-  </div>
-`;  
-  let pty = `marker${featCount}`
-  div.addEventListener('click', () => mymap.panTo({ 
-    lat: card.coords.lat, lon: card.coords.lon 
-  }))
-  div.addEventListener('mouseenter', () => featMarkers[pty].openTooltip())
-  div.addEventListener('mouseleave', () => featMarkers[pty].closeTooltip())
-  featCount++
-  featRoomsContainer.appendChild(div);
-};
+const init = () => {
+  originalData.forEach((i, idx) => {
+    i.rating = (Math.random() + 4).toFixed(1);
+    i.ratingCount = (Math.random() * 102).toFixed();
+    i.coords = markers[idx];
+  });
+  
+  flatpickr("#datepicker", {
+    mode: "range",
+    locale: "pt",
+    dateFormat: "d-m-Y",
+    onClose: function (selected) {
+      updateCardsTotal(data, days_between(selected[0], selected[1]));
+    },
+  });
+  let mymap = L.map("map", {
+    scrollWheelZoom: false,
+  }).setView({ lat: 51.509334, lon: -0.114883 }, 13);
+  L.tileLayer(
+    "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoicmVpbmFsZG9vbyIsImEiOiJjazl2a3g1ZXAwMDlxM2dvNGJ5M3ZjZDJ3In0.1B7OE0PYPCDADiruf5hh7A",
+    {
+      attribution:
+        'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      maxZoom: 18,
+      id: "mapbox/streets-v11",
+      tileSize: 512,
+      zoomOffset: -1,
+    }
+  ).addTo(mymap);
 
-let buttons = document.querySelectorAll(".sort-by__button")
-buttons.forEach((btn) => btn.addEventListener('click', () => {
-  // Remove 'selected' class from other buttons
-  buttons.forEach((b) => b.classList.remove("button-selected"))
-  // Add it to current button
-  btn.classList.add("button-selected")
-  filterBy(btn.dataset.type)
-}))
+  originalData.forEach(({ coords, price }, idx) => {
+    let mkr = L.marker(
+      { lat: coords.lat, lon: coords.lon },
+      {
+        riseOnHover: true,
+        id: coords.id,
+      }
+    );
+    mkr.addTo(mymap).bindTooltip(`<b>R$ ${price}</b>`);
+    mkr.on("click", () => mymap.panTo(coords));
+    // save 4 markers for featured rooms
+    if (idx < 4) {
+      featMarkers[`marker${idx}`] = mkr;
+    }
+  });
+  
+  const renderFeatCard = (card) => {
+    const div = document.createElement("div");
+    div.className = "featured__room";
+    div.innerHTML = `
+    <img src="${card.photo}" alt="${card.name}" class="featured__img">
+    <div class="featured__room__medal flex-center">
+      <i class="fas fa-medal"></i>
+    </div>
+    <div class="featured__room__score flex-center">
+      <i class="fas fa-star"></i> ${card.rating}
+    </div>
+  `;
+    let item = `marker${featCount}`;
+    div.addEventListener("click", () =>
+      mymap.panTo({
+        lat: card.coords.lat,
+        lon: card.coords.lon,
+      })
+    );
+    div.addEventListener("mouseenter", () => featMarkers[item].openTooltip());
+    div.addEventListener("mouseleave", () => featMarkers[item].closeTooltip());
+    featCount++;
+    featRoomsContainer.appendChild(div);
+  };
 
-const filterBy = (filter) => {
-  if(filter === lastFilter) return;
-  lastFilter = filter
-  let newArr;
-  if(filter.startsWith('rat')) {
-    // Sort top to bottom if its rating or ratingCount
-    newArr = fakeApi.sort((a,b) => a[filter] < b[filter])    
-  } else {
-    newArr = fakeApi.sort((a,b) => a[filter] > b[filter])
-  }
-  roomsContainer.innerHTML = ""
-  newArr.forEach(renderNormalCard)
+  let buttons = document.querySelectorAll(".sort-by__button");
+  buttons.forEach((btn) =>
+    btn.addEventListener("click", () => {
+      // Remove 'selected' class from other buttons
+      buttons.forEach((b) => b.classList.remove("button-selected"));
+      // Add it to current button
+      btn.classList.add("button-selected");
+      filterBy(data, btn.dataset.type);
+    })
+  );
+
+  originalData.slice(0, 4).forEach(renderFeatCard);
+  paginationHandler.renderPage()
 }
 
-fakeApi.slice(0,4).forEach(renderFeatCard)
-filterBy("price")
+const renderPageButtons = (page) => {
+  const checkPageNum = (num) => (page === num ? "pages__button--selected" : "");
+  const checkDisabled = (num) => (page === num ? "disabled" : "");
+  const section = document.querySelector("#pages");
+  section.innerHTML = `
+  <button
+    class="pages__button pages__button--arrow"
+    ${checkDisabled(1)}
+    onclick="paginationHandler.setPrevPage()"
+  >
+    <i class="fas fa-arrow-circle-left"></i>
+  </button>
+  <button class="pages__button ${checkPageNum(1)}"
+    onclick="paginationHandler.goToPage(1)"
+  >
+    1
+  </button>
+  <button class="pages__button ${checkPageNum(2)}"
+    onclick="paginationHandler.goToPage(2)"
+  >
+    2
+  </button>
+  <button class="pages__button ${checkPageNum(3)}"
+    onclick="paginationHandler.goToPage(3)"
+  >
+    3
+  </button>
+  <button
+    class="pages__button pages__button--arrow"
+    ${checkDisabled(3)}
+    onclick="paginationHandler.setNextPage()"
+  >
+    <i class="fas fa-arrow-circle-right"></i>
+  </button>
+`;
+};
+
+const paginationHandler = {
+  page: 0,
+  setNextPage: function() {
+    // this.page++
+    // data = originalData.slice(this.page*8, (this.page*8)+8)
+    // filterBy(data, "price");
+    // renderPageButtons(this.page + 1)
+  },
+  setPrevPage: function() {
+    // this.page--
+    // data = originalData.slice(this.page*8, (this.page*8)+8)
+    // filterBy(data, "price");
+    // renderPageButtons(this.page + 1)
+  },  
+  renderPage: function(page) {
+    if (page) {
+      this.page = page-1
+    }
+    data = originalData.slice(this.page*8, (this.page*8)+8)
+    filterBy(data, "price");
+    renderPageButtons(this.page + 1)
+  },
+  renderInitial: function() {
+    document.querySelector(".app").classList.remove("hidden")
+    document.querySelector(".loader").classList.add("hidden")
+    init()
+  },
+}
+
+async function fetchRooms() {
+  let response =  await fetch(apiUrl)
+  return await response.json()
+}
+
+async function main() {
+  originalData = await fetchRooms();
+  if(originalData) {
+    paginationHandler.renderInitial()
+  }
+}
+
+main();

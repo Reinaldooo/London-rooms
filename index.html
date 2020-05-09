@@ -16,7 +16,8 @@
    crossorigin=""/>
   </head>
   <body>
-    <div class="container">
+    <div class="loader"></div>
+    <div class="container app hidden">
       <header class="topbar flex-spcbtw">
         <div class="topbar__logo">
           <i class="fas fa-suitcase"></i>
@@ -28,7 +29,7 @@
         </a>
       </header>
 
-      <div class="options">
+      <div id="options" class="options">
         <input type="date" id="datepicker" class="options__dates" placeholder="Por favor escolhas as datas">
       </div>
       <section class="featured flex-spcbtw">
@@ -36,11 +37,10 @@
           <!-- <img src="./assets/map.png" alt=""> -->
         </div>
         <div id="feat-rooms" class="featured__rooms">
-          
         </div>
       </section>
 
-      <section class="sort-by">
+      <section id="sort-by" class="sort-by">
         Classificar por: 
         <button class="sort-by__button button-selected" data-type="price">
           preço
@@ -57,7 +57,8 @@
       </section>
 
       <section id="all-rooms" class="all-rooms flex-spcbtw">
-        
+      </section>
+      <section id="pages" class="pages flex-center">        
       </section>
     </div>
     <!-- Scripts -->
