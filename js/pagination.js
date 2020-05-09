@@ -38,15 +38,15 @@ const renderPageButtons = (page) => {
 const paginationHandler = {
   // Page start with 0 just to facilitate the .slice below
   page: 0,
-  setNextPage: function() {
+  setNextPage() {
     this.page++
     this.renderPage()
   },
-  setPrevPage: function() {
+  setPrevPage() {
     this.page--
     this.renderPage()
   },  
-  renderPage: function(page, filter, noFilter) {
+  renderPage(page, filter, noFilter) {
     if (filter === lastFilter) return;
     if (page-1 === this.page && noFilter) return;
     if (page) this.page = page-1;
@@ -56,7 +56,7 @@ const paginationHandler = {
     printCards(filtered.slice(this.page*8, (this.page*8)+8))
     renderPageButtons(this.page + 1)
   },
-  renderInitial: function() {
+  renderInitial() {
     document.querySelector(".app").classList.remove("hidden")
     document.querySelector(".loader").classList.add("hidden")
     init()

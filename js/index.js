@@ -93,7 +93,7 @@ const init = () => {
     })
   );
 
-  originalData.slice(0, 4).forEach(renderFeatCard);
+  originalData.slice(0, 4).forEach((card) => renderFeatCard(card, mymap));
   paginationHandler.renderPage()
 }
 

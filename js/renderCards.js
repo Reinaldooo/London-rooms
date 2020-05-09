@@ -33,7 +33,7 @@ const renderNormalCard = (card) => {
   roomsContainer.appendChild(div);
 };
 
-const renderFeatCard = (card) => {
+const renderFeatCard = (card, mymap) => {
   const div = document.createElement("div");
   div.className = "featured__room";
   div.innerHTML = `
