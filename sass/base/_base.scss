@@ -312,6 +312,10 @@ body {
       opacity: .3
     }
 
+    &:active {
+      transform: scale(1.1);
+    }
+
     &--selected {
       background-color: #ff385c;
       color: white;

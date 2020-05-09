@@ -36,6 +36,7 @@ const renderPageButtons = (page) => {
 };
 
 const paginationHandler = {
+  // Page start with 0 just to facilitate the .slice below
   page: 0,
   setNextPage: function() {
     this.page++
@@ -46,12 +47,9 @@ const paginationHandler = {
     this.renderPage()
   },  
   renderPage: function(page, filter) {
-    if (page) {
-      this.page = page-1
-    }
-    if (!filter) {
-      filter = lastFilter
-    }
+    if (page-1 === this.page) return;
+    if (page) this.page = page-1;
+    if (!filter) filter = lastFilter;
     // dataToShow = originalData.slice(this.page*8, (this.page*8)+8)
     let filtered = filterBy(originalData, filter);
     printCards(filtered.slice(this.page*8, (this.page*8)+8))

@@ -299,6 +299,9 @@ body {
     font-weight: bold; }
     .pages__button:disabled {
       opacity: .3; }
+    .pages__button:active {
+      -webkit-transform: scale(1.1);
+              transform: scale(1.1); }
     .pages__button--selected {
       background-color: #ff385c;
       color: white; }
