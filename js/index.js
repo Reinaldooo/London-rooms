@@ -5,8 +5,13 @@ let lastFilter = "price";
 let featMarkers = {};
 let featCount = 0;
 let numDays = null;
+let apiTimeout = setTimeout(() => {
+  document.querySelector(".loader").classList.add("hidden")
+  document.querySelector(".error").classList.remove("hidden")
+}, 8000);
 const roomsContainer = document.querySelector("#all-rooms");
 const featRoomsContainer = document.querySelector("#feat-rooms");
+
 
 const filterBy = (arr, filter) => {
   lastFilter = filter;
@@ -113,13 +118,19 @@ const init = () => {
 }
 
 async function fetchRooms() {
-  let response =  await fetch(apiUrl)
-  return await response.json()
+  try {
+    let response =  await fetch(apiUrl)
+    return await response.json()
+  } catch {
+    document.querySelector(".loader").classList.add("hidden")
+    document.querySelector(".error").classList.remove("hidden")
+  }
 }
 
 async function main() {
   originalData = await fetchRooms();
   if(originalData) {
+    window.clearTimeout(apiTimeout)
     paginationHandler.renderInitial()
   }
 }

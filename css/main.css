@@ -23,44 +23,6 @@ body {
   100% {
     opacity: 1; } }
 
-.hidden {
-  display: none; }
-
-.container {
-  margin: 0 auto;
-  width: 75%;
-  max-width: 1200px; }
-  @media screen and (max-width: 500px) {
-    .container {
-      width: 100%; } }
-
-.flex-spcbtw {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap; }
-
-.flex-center {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center; }
-
-.text-12 {
-  font-size: 12px; }
-
 .topbar {
   padding: 30px 40px; }
   .topbar__logo {
@@ -375,6 +337,55 @@ body {
     color: #555; }
     .footer a:first-of-type {
       margin-right: 10px; }
+
+.error {
+  margin-top: 50px;
+  font-size: 25px;
+  color: #555;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+
+.hidden {
+  display: none; }
+
+.container {
+  margin: 0 auto;
+  width: 75%;
+  max-width: 1200px; }
+  @media screen and (max-width: 500px) {
+    .container {
+      width: 100%; } }
+
+.flex-spcbtw {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
+
+.flex-center {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+
+.text-12 {
+  font-size: 12px; }
 
 .loader,
 .loader:before,
