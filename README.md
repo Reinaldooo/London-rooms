@@ -1,6 +1,5 @@
 ### London Rooms
-Este pequeno projeto é baseado no Airbnb.
-Foi o segundo desafio do [Hiring Coders](https://hiringcoders.gama.academy/).
+Este pequeno projeto é baseado no Airbnb e foi o segundo desafio do programa [Hiring Coders](https://hiringcoders.gama.academy/).
 
 Pacotes utilizados:
 
