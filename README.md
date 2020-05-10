@@ -3,7 +3,7 @@ Este pequeno projeto é baseado no Airbnb e foi o segundo desafio do programa [H
 
 Pacotes utilizados:
 
-* [Flatpicker](https://flatpickr.js.org/)
+* [Flatpickr](https://flatpickr.js.org/)
 * [Leaflet](https://leafletjs.com/)
 
 Todo o resto foi feito do zero.
