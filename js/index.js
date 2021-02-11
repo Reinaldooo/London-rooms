@@ -1,4 +1,4 @@
-const apiUrl = "https://api.sheety.co/30b6e400-9023-4a15-8e6c-16aa4e3b1e72";
+const apiUrl = "https://api.reinaldowft.com/london-rooms";
 let originalData = null;
 let dataToShow = null;
 let lastFilter = "price";
@@ -6,12 +6,11 @@ let featMarkers = {};
 let featCount = 0;
 let numDays = null;
 let apiTimeout = setTimeout(() => {
-  document.querySelector(".loader").classList.add("hidden")
-  document.querySelector(".error").classList.remove("hidden")
+  document.querySelector(".loader").classList.add("hidden");
+  document.querySelector(".error").classList.remove("hidden");
 }, 8000);
 const roomsContainer = document.querySelector("#all-rooms");
 const featRoomsContainer = document.querySelector("#feat-rooms");
-
 
 const filterBy = (arr, filter) => {
   lastFilter = filter;
@@ -24,17 +23,17 @@ const filterBy = (arr, filter) => {
 
 const handleSelect = () => {
   const select = document.querySelector("select");
-  paginationHandler.renderPage(1, select.value)
-}
+  paginationHandler.renderPage(1, select.value);
+};
 
 const updateApiImgSize = (img, size) => {
   if (size) {
-    let tmp = img.split("=")
-    tmp[tmp.length - 1] = size
-    return tmp.join("=")
+    let tmp = img.split("=");
+    tmp[tmp.length - 1] = size;
+    return tmp.join("=");
   }
-  return img
-}
+  return img;
+};
 
 function days_between(date1, date2) {
   // The number of milliseconds in one day
@@ -47,11 +46,11 @@ function days_between(date1, date2) {
 
 function updateCardsTotal(num) {
   // Avoid re-rendering if the number of days is equal
-  if(numDays === num) return;
+  if (numDays === num) return;
   // update num to one if it is zero
   num = num ? num : 1;
   numDays = num;
-  paginationHandler.renderPage()
+  paginationHandler.renderPage();
 }
 
 const init = () => {
@@ -60,7 +59,7 @@ const init = () => {
     i.rating = (Math.random() + 4).toFixed(1);
     i.ratingCount = Math.round(Math.random() * 102);
     i.coords = markers[idx];
-    i.photo = updateApiImgSize(i.photo, "large")
+    i.photo = updateApiImgSize(i.photo, "large");
   });
   // flatpickr init
   flatpickr("#datepicker", {
@@ -88,12 +87,9 @@ const init = () => {
   ).addTo(mymap);
   // create markers for each room
   originalData.forEach(({ coords, price }, idx) => {
-    let mkr = L.marker(
-      coords,
-      {
-        riseOnHover: true
-      }
-    );
+    let mkr = L.marker(coords, {
+      riseOnHover: true,
+    });
     mkr.addTo(mymap).bindTooltip(`<b>R$ ${price}</b>`);
     mkr.on("click", () => mymap.panTo(coords));
     // save 4 markers for featured rooms
@@ -109,29 +105,29 @@ const init = () => {
       buttons.forEach((b) => b.classList.remove("button-selected"));
       // Add it to current button
       btn.classList.add("button-selected");
-      paginationHandler.renderPage(1, btn.dataset.type)
+      paginationHandler.renderPage(1, btn.dataset.type);
     })
   );
 
   originalData.slice(0, 4).forEach((card) => renderFeatCard(card, mymap));
-  paginationHandler.renderPage()
-}
+  paginationHandler.renderPage();
+};
 
 async function fetchRooms() {
   try {
-    let response =  await fetch(apiUrl)
-    return await response.json()
+    let response = await fetch(apiUrl);
+    return await response.json();
   } catch {
-    document.querySelector(".loader").classList.add("hidden")
-    document.querySelector(".error").classList.remove("hidden")
+    document.querySelector(".loader").classList.add("hidden");
+    document.querySelector(".error").classList.remove("hidden");
   }
 }
 
 async function main() {
   originalData = await fetchRooms();
-  if(originalData) {
-    window.clearTimeout(apiTimeout)
-    paginationHandler.renderInitial()
+  if (originalData) {
+    window.clearTimeout(apiTimeout);
+    paginationHandler.renderInitial();
   }
 }
 
